@@ -93,6 +93,18 @@ namespace LibraryApp
             library.Add(new Book(title, author, genre, year, price));
             Console.WriteLine("Книга добавлена!");
         }
+        static void RemoveBook(List<Book> library)
+        {
+            Console.Write("Введите Id для удаления: ");
+            if (!int.TryParse(Console.ReadLine(), out int id)) return;
+            var book = library.FirstOrDefault(b => b.Id == id);
+            if (book != null)
+            {
+                library.Remove(book);
+                Console.WriteLine("Книга удалена.");
+            }
+            else Console.WriteLine("Книга не найдена.");
+        }
 
 
 
