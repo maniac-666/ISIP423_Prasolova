@@ -105,7 +105,31 @@ namespace LibraryApp
             }
             else Console.WriteLine("Книга не найдена.");
         }
+        static void SearchBooks(List<Book> library)
+        {
+            Console.WriteLine("Поиск: 1 - по названию, 2 - по автору, 3 - по жанру");
+            if (!int.TryParse(Console.ReadLine(), out int type)) return;
 
+            Console.Write("Введите значение: ");
+            string val = Console.ReadLine();
+
+            IEnumerable<Book> result = Enumerable.Empty<Book>();
+
+            if (type == 1)
+                result = library.Where(b => b.Title.Contains(val, StringComparison.OrdinalIgnoreCase));
+            else if (type == 2)
+                result = library.Where(b => b.Author.Contains(val, StringComparison.OrdinalIgnoreCase));
+            else if (type == 3)
+                result = library.Where(b => b.Genre.Contains(val, StringComparison.OrdinalIgnoreCase));
+
+            PrintBooks(result);
+        }
+
+        static void PrintBooks(IEnumerable<Book> books)
+        {
+            foreach (var b in books) Console.WriteLine(b);
+        }
+    }
 
 
 
