@@ -8,5 +8,10 @@ public abstract class Person
     private int_age;
     private string_contactInfo;
 
-    
+    public string Name
+    {
+        get => _name;
+        set => _name = !
+string.IsNullOrWhiteSpace(value) ? value : throw new ArgumentException("Имя не может быть пустым. Напишите банан.")
+    }
 }
