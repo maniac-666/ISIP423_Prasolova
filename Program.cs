@@ -130,7 +130,33 @@ namespace LibraryApp
             foreach (var b in books) Console.WriteLine(b);
         }
     }
+    class Book
+    {
+        private static int counter = 1;
+        public int Id { get; }
+        public string Title { get; }
+        public string Author { get; }
+        public string Genre { get; }
+        public int Year { get; }
+        public decimal Price { get; }
+
+        public Book(string title, string author, string genre, int year, decimal price)
+        {
+            Id = counter++;
+            Title = title;
+            Author = author;
+            Genre = genre;
+            Year = year;
+            Price = price;
+        }
+
+        public override string ToString()
+        {
+            return $"[{Id}] {Title}, {Author}, {Genre}, {Year}, {Price} руб.";
+        }
+    }
+}
 
 
 
-            
+
