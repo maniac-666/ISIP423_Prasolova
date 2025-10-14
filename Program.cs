@@ -65,6 +65,34 @@ namespace LibraryApp
                 }
             }
         }
+        static void AddBook(List<Book> library)
+        {
+            Console.Write("Название: ");
+            string title = Console.ReadLine();
+
+            Console.Write("Автор: ");
+            string author = Console.ReadLine();
+
+            Console.Write("Жанр (Роман/Фантастика/Приключения): ");
+            string genre = Console.ReadLine();
+
+            Console.Write("Год издания: ");
+            if (!int.TryParse(Console.ReadLine(), out int year) || year < 0)
+            {
+                Console.WriteLine("Некорректный гад!");
+                return;
+            }
+
+            Console.Write("Цена: ");
+            if (!decimal.TryParse(Console.ReadLine(), out decimal price) || price <= 0)
+            {
+                Console.WriteLine("Некорректная цена!");
+                return;
+            }
+
+            library.Add(new Book(title, author, genre, year, price));
+            Console.WriteLine("Книга добавлена!");
+        }
 
 
 
