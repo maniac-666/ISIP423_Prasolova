@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
+
 
 public abstract class Person
 {
-    private string_name;
-    private int_age;
-    private string_contactInfo;
+    private string _name;
+    private int _age;
+    private string _contactInfo;
 
     public string Name
     {
         get => _name;
-        set => _name = !
-string.IsNullOrWhiteSpace(value) ? value : throw new ArgumentException("Имя не может быть пустым. Напишите банан.")
+        set => _name = string.IsNullOrWhiteSpace(value) ? value : throw new ArgumentException("Имя не может быть пустым. Напишите банан.");
     }
-}
-  public int Age
+
+    public int Age
     {
         get => _age;
         set => _age = value >= 16 && value <= 100 ? value : throw new ArgumentException("Возраст должен быть от 16 до 100");
@@ -29,18 +30,19 @@ string.IsNullOrWhiteSpace(value) ? value : throw new ArgumentException("Имя �
     public int Id { get; protected set; }
 
     protected Person(int id, string name, int age, string contactInfo)
-{
-    Id = id;
-    Name = name;
-    Age = age;
-    ContactInfo = contactInfo;
+    {
+        Id = id;
+        Name = name;
+        Age = age;
+        ContactInfo = contactInfo;
+    }
+
+    public virtual void DisplayInfo()
+    {
+        Console.WriteLine($"ID: {Id}, Имя: {Name}, Возраст: {Age}, Контакты: {ContactInfo}");
+    }
 }
 
-public virtual void DisplayInfo()
-{
-    Console.WriteLine($"ID: {Id}, Имя: {Name}, Возраст: {Age}, Контакты: {ContactInfo}");
-}
-}
 
 public class Student : Person
 {
@@ -62,10 +64,11 @@ public class Student : Person
             course.AddStudent(this);
         }
     }
+    //4
 
     public override void DisplayInfo()
     {
-        Console.WriteLine($"=== СТУДЕНТ ===");
+        Console.WriteLine($" СТУДЕНТ ");
         base.DisplayInfo();
         Console.WriteLine($"Курсы ({_courses.Count}):");
         foreach (var course in _courses)
@@ -99,7 +102,7 @@ public class Teacher : Person
 
     public override void DisplayInfo()
     {
-        Console.WriteLine($"=== ПРЕПОДАВАТЕЛЬ ===");
+        Console.WriteLine(" ПРЕПОДАВАТЕЛЬ ");
         base.DisplayInfo();
         Console.WriteLine($"Ведет курсы ({_courses.Count}):");
         foreach (var course in _courses)
@@ -156,7 +159,7 @@ public class Course
 
     public void DisplayInfo()
     {
-        Console.WriteLine($"=== КУРС ===");
+        Console.WriteLine($"КУРС");
         Console.WriteLine($"ID: {Id}, Название: {Name}");
         Console.WriteLine($"Описание: {Description}");
         Console.WriteLine($"Преподаватель: {_teacher?.Name ?? "Не назначен"}");
@@ -213,7 +216,7 @@ public class UniversityManager
 
     public void DisplayAllStudents()
     {
-        Console.WriteLine("\n=== ВСЕ СТУДЕНТЫ ===");
+        Console.WriteLine("\n ВСЕ СТУДЕНТЫ ");
         foreach (var student in _students)
         {
             student.DisplayInfo();
@@ -222,7 +225,7 @@ public class UniversityManager
 
     public void DisplayAllTeachers()
     {
-        Console.WriteLine("\n=== ВСЕ ПРЕПОДАВАТЕЛИ ===");
+        Console.WriteLine("\n ВСЕ ПРЕПОДАВАТЕЛИ ");
         foreach (var teacher in _teachers)
         {
             teacher.DisplayInfo();
@@ -231,7 +234,7 @@ public class UniversityManager
 
     public void DisplayAllCourses()
     {
-        Console.WriteLine("\n=== ВСЕ КУРСЫ ===");
+        Console.WriteLine("\n ВСЕ КУРСЫ ");
         foreach (var course in _courses)
         {
             course.DisplayInfo();
@@ -307,7 +310,7 @@ public class ConsoleMenu
     private void DisplayMainMenu()
     {
         Console.Clear();
-        Console.WriteLine("=== СИСТЕМА УПРАВЛЕНИЯ УНИВЕРСИТЕТОМ ===");
+        Console.WriteLine(" СИСТЕМА УПРАВЛЕНИЯ УНИВЕРСИТЕТОМ ");
         Console.WriteLine("1. Добавить студента");
         Console.WriteLine("2. Добавить преподавателя");
         Console.WriteLine("3. Создать курс");
@@ -321,7 +324,7 @@ public class ConsoleMenu
 
     private void AddStudentMenu()
     {
-        Console.WriteLine("\n--- Добавление студента ---");
+        Console.WriteLine("\n Добавление студента ");
         var name = GetUserInput("Введите имя: ");
         var age = int.Parse(GetUserInput("Введите возраст: "));
         var contact = GetUserInput("Введите контактную информацию: ");
@@ -331,7 +334,7 @@ public class ConsoleMenu
 
     private void AddTeacherMenu()
     {
-        Console.WriteLine("\n--- Добавление преподавателя ---");
+        Console.WriteLine("\n Добавление преподавателя ");
         var name = GetUserInput("Введите имя: ");
         var age = int.Parse(GetUserInput("Введите возраст: "));
         var contact = GetUserInput("Введите контактную информацию: ");
@@ -341,7 +344,7 @@ public class ConsoleMenu
 
     private void AddCourseMenu()
     {
-        Console.WriteLine("\n--- Создание курса ---");
+        Console.WriteLine("\n Создание курса ");
         var name = GetUserInput("Введите название курса: ");
         var description = GetUserInput("Введите описание курса: ");
 
@@ -350,7 +353,7 @@ public class ConsoleMenu
 
     private void EnrollStudentMenu()
     {
-        Console.WriteLine("\n--- Запись студента на курс ---");
+        Console.WriteLine("\n Запись студента на курс ");
         var studentId = int.Parse(GetUserInput("Введите ID студента: "));
         var courseId = int.Parse(GetUserInput("Введите ID курса: "));
 
@@ -359,7 +362,7 @@ public class ConsoleMenu
 
     private void AssignTeacherMenu()
     {
-        Console.WriteLine("\n--- Назначение преподавателя на курс ---");
+        Console.WriteLine("\n Назначение преподавателя на курс ");
         var teacherId = int.Parse(GetUserInput("Введите ID преподавателя: "));
         var courseId = int.Parse(GetUserInput("Введите ID курса: "));
 
