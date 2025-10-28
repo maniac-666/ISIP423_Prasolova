@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ISIP423_Prasolova.Item
 {
-    internal class Weapon
+    internal class Weapon : Item
     {
+        public int Damage;
     }
 }
