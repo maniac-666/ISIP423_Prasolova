@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace pomogite_423
+namespace ISIP423_Prasolova
 {
     internal class Game
     {
