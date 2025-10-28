@@ -1,22 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-
-namespace TextRoguelike
+﻿namespace ISIP423_Prasolova
 {
-    public class Weapon
+    internal class Program
     {
-        public string Name { get; set; }
-        public int Damage { get; set; }
-
-        public Weapon(string name, int damage)
+        public void Main(string[] args)
         {
-            Name = name;
-            Damage = damage;
-        }
+            Game game = new Game();
+            game.StartGame();
 
-        public override string ToString()
-        {
-            return $"{Name} (урон: {Damage})";
+
         }
     }
+}
