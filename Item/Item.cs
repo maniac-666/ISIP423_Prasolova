@@ -8,5 +8,7 @@ namespace ISIP423_Prasolova.Item
 {
     internal class Item
     {
+        public string Name;
+        public int Durability;
     }
 }
